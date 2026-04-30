@@ -12,7 +12,8 @@ export const NotificationProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const newSocket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5001');
+      const socketUrl = import.meta.env.VITE_SOCKET_URL || (import.meta.env.PROD ? '/' : 'http://localhost:5001');
+      const newSocket = io(socketUrl);
       setSocket(newSocket);
 
       const fetchNotifications = async () => {
