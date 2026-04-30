@@ -7,6 +7,12 @@ const connectDB = async () => {
   try {
     const uri = process.env.MONGODB_URI;
     console.log('Connecting to MongoDB...');
+
+    if (!uri && process.env.NODE_ENV === 'production') {
+      console.error('❌ CRITICAL ERROR: MONGODB_URI is not defined in the environment variables.');
+      console.error('Please configure the MONGODB_URI in your cloud provider settings.');
+      process.exit(1);
+    }
     
     // Attempt Atlas/Configured DB connection with a short timeout
     await mongoose.connect(uri, {
@@ -16,6 +22,12 @@ const connectDB = async () => {
     console.log(`MongoDB Connected: ${mongoose.connection.host}`);
   } catch (error) {
     console.error(`Atlas Connection Error: ${error.message}`);
+
+    if (process.env.NODE_ENV === 'production') {
+      console.error('❌ Failed to connect to MongoDB in production. Exiting...');
+      process.exit(1);
+    }
+
     console.log('Falling back to local MongoMemoryServer for development...');
     
     try {
