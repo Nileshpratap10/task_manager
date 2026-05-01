@@ -107,9 +107,13 @@ const Projects = () => {
                   {project.members?.slice(0, 3).map((m, i) => (
                     <img 
                       key={i}
-                      src={m.user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(m.user?.name || '')}&background=3b82f6&color=fff`} 
+                      src={(m.user?.avatar && m.user.avatar !== 'undefined' && m.user.avatar !== 'null') ? m.user.avatar : `https://ui-avatars.com/api/?name=${encodeURIComponent(m.user?.name || '')}&background=3b82f6&color=fff`} 
                       className="w-8 h-8 rounded-full border-2 border-white"
                       title={m.user?.name}
+                      onError={(e) => {
+                        e.target.onerror = null; 
+                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(m.user?.name || '')}&background=3b82f6&color=fff`;
+                      }}
                     />
                   ))}
                   {project.members?.length > 3 && (
