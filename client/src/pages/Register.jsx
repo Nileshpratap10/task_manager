@@ -24,10 +24,10 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] dark:bg-slate-950 p-4 transition-colors duration-300">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-100 blur-[100px] opacity-50"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-100 blur-[100px] opacity-50"></div>
+        <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-100 dark:bg-blue-900/10 blur-[100px] opacity-50"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-100 dark:bg-indigo-900/10 blur-[100px] opacity-50"></div>
       </div>
 
       <div className="w-full max-w-md">
@@ -35,14 +35,14 @@ const Register = () => {
           <div className="inline-flex items-center justify-center p-3 bg-blue-600 rounded-2xl shadow-lg mb-4">
             <CheckSquare className="text-white" size={32} />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
-          <p className="text-gray-500 mt-2">Start collaborating with your team today</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create Account</h1>
+          <p className="text-gray-500 dark:text-slate-400 mt-2">Start collaborating with your team today</p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl shadow-blue-900/5 border border-gray-100 p-8">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl shadow-blue-900/5 border border-gray-100 dark:border-slate-800 p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Full Name</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input 
@@ -51,13 +51,13 @@ const Register = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all text-gray-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input 
@@ -66,13 +66,13 @@ const Register = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@company.com"
-                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all text-gray-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input 
@@ -81,21 +81,21 @@ const Register = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Min. 6 characters"
-                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-900 transition-all text-gray-900 dark:text-white"
                 />
               </div>
             </div>
 
             <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700 ml-1">I am a:</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 ml-1">I am a:</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
                   onClick={() => setRole('member')}
                   className={`p-3 rounded-xl border-2 transition-all flex flex-col items-center gap-2 ${
                     role === 'member' 
-                    ? 'border-blue-500 bg-blue-50 text-blue-600 shadow-sm' 
-                    : 'border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-200'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 shadow-sm' 
+                    : 'border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50 text-gray-400 dark:text-slate-500 hover:border-gray-200 dark:hover:border-slate-700'
                   }`}
                 >
                   <UsersIcon size={20} />
@@ -106,15 +106,15 @@ const Register = () => {
                   onClick={() => setRole('admin')}
                   className={`p-3 rounded-xl border-2 transition-all flex flex-col items-center gap-2 ${
                     role === 'admin' 
-                    ? 'border-blue-500 bg-blue-50 text-blue-600 shadow-sm' 
-                    : 'border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-200'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 shadow-sm' 
+                    : 'border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50 text-gray-400 dark:text-slate-500 hover:border-gray-200 dark:hover:border-slate-700'
                   }`}
                 >
                   <ShieldCheck size={20} />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Team Admin</span>
                 </button>
               </div>
-              <p className="text-[10px] text-gray-400 leading-tight px-1 italic">
+              <p className="text-[10px] text-gray-400 dark:text-slate-500 leading-tight px-1 italic">
                 *Admins can create and manage projects. Members join existing ones via invite.
               </p>
             </div>
@@ -135,10 +135,10 @@ const Register = () => {
             </button>
           </form>
 
-          <div className="mt-8 pt-8 border-t border-gray-100 text-center">
-            <p className="text-gray-600">
+          <div className="mt-8 pt-8 border-t border-gray-100 dark:border-slate-800 text-center">
+            <p className="text-gray-600 dark:text-slate-400">
               Already have an account? {' '}
-              <Link to="/login" className="text-blue-600 font-semibold hover:underline">
+              <Link to="/login" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
                 Sign In
               </Link>
             </p>
