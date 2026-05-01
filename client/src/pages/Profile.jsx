@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { updateProfile } from '../api/auth';
+import { updateProfile, uploadAvatar } from '../api/auth';
 import { User, Mail, Lock, Camera, Save } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -13,6 +13,26 @@ const Profile = () => {
     password: '',
   });
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formDataUpload = new FormData();
+    formDataUpload.append('avatar', file);
+
+    setUploading(true);
+    try {
+      const { data } = await uploadAvatar(formDataUpload);
+      setFormData({ ...formData, avatar: data.avatarUrl });
+      toast.success('Image uploaded! Remember to save changes.');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to upload image');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,14 +57,31 @@ const Profile = () => {
         <div className="px-8 pb-8">
           <div className="relative -mt-12 mb-8">
             <div className="relative inline-block">
-              <img 
-                src={formData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || '')}&background=3b82f6&color=fff&size=150`} 
-                alt="Profile" 
-                className="w-24 h-24 rounded-2xl border-4 border-white shadow-lg object-cover"
-              />
-              <button className="absolute bottom-1 right-1 p-1.5 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors">
+              <div className="relative">
+                <img 
+                  src={formData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || '')}&background=3b82f6&color=fff&size=150`} 
+                  alt="Profile" 
+                  className={`w-24 h-24 rounded-2xl border-4 border-white shadow-lg object-cover transition-opacity ${uploading ? 'opacity-50' : 'opacity-100'}`}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || '')}&background=3b82f6&color=fff&size=150`;
+                  }}
+                />
+                {uploading && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                )}
+              </div>
+              <label className="absolute bottom-1 right-1 p-1.5 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors cursor-pointer">
                 <Camera size={14} />
-              </button>
+                <input 
+                  type="file" 
+                  className="hidden" 
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </label>
             </div>
             <div className="mt-4">
               <h2 className="text-xl font-bold text-gray-900">{user?.name}</h2>
