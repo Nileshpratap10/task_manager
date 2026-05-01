@@ -107,7 +107,7 @@ const Projects = () => {
                   {project.members?.slice(0, 3).map((m, i) => (
                     <img 
                       key={i}
-                      src={m.user?.avatar || `https://ui-avatars.com/api/?name=${m.user?.name}`} 
+                      src={m.user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(m.user?.name || '')}&background=3b82f6&color=fff`} 
                       className="w-8 h-8 rounded-full border-2 border-white"
                       title={m.user?.name}
                     />

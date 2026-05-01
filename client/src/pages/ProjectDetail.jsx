@@ -151,7 +151,7 @@ const ProjectDetail = () => {
           <div className="flex -space-x-2">
             {currentProject?.members.slice(0, 3).map((member, i) => (
               <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-gray-200 dark:bg-slate-700 overflow-hidden shadow-sm" title={member.user.name}>
-                <img src={member.user.avatar} alt="" className="w-full h-full object-cover" />
+                <img src={member.user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.user.name || '')}&background=3b82f6&color=fff`} alt="" className="w-full h-full object-cover" />
               </div>
             ))}
             {currentProject?.members.length > 3 && (
@@ -255,7 +255,7 @@ const ProjectDetail = () => {
                                   </div>
                                   <div className="w-6 h-6 rounded-full bg-gray-100 dark:bg-slate-800 overflow-hidden border border-white dark:border-slate-800 shadow-sm">
                                     {task.assignedTo ? (
-                                      <img src={task.assignedTo.avatar} alt="" className="w-full h-full object-cover" />
+                                      <img src={task.assignedTo.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(task.assignedTo.name || '')}&background=3b82f6&color=fff`} alt="" className="w-full h-full object-cover" />
                                     ) : (
                                       <UserIcon className="w-full h-full p-1 text-gray-300 dark:text-slate-600" />
                                     )}
@@ -298,7 +298,7 @@ const ProjectDetail = () => {
                     <td className="px-8 py-5">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 rounded-xl bg-gray-200 dark:bg-slate-800 overflow-hidden shadow-sm">
-                          <img src={member.user.avatar} alt="" className="w-full h-full object-cover" />
+                          <img src={member.user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.user.name || '')}&background=3b82f6&color=fff`} alt="" className="w-full h-full object-cover" />
                         </div>
                         <div>
                           <p className="text-sm font-bold text-gray-900 dark:text-white">{member.user.name}</p>

@@ -38,7 +38,7 @@ const Profile = () => {
           <div className="relative -mt-12 mb-8">
             <div className="relative inline-block">
               <img 
-                src={formData.avatar || 'https://via.placeholder.com/150'} 
+                src={formData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || '')}&background=3b82f6&color=fff&size=150`} 
                 alt="Profile" 
                 className="w-24 h-24 rounded-2xl border-4 border-white shadow-lg object-cover"
               />
